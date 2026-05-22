@@ -13,6 +13,13 @@ const server = createServer((req, res) => {
         res.write(JSON.stringify(users))
         res.end()
     }
+    else {
+        res.setHeader('Content-Type', "application/json")
+        res.statusCode = 404
+        res.write(JSON.stringify({ message: "Route not found!" }))
+        res.end()
+    }
+
 })
 
 
