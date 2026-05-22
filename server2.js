@@ -33,7 +33,23 @@ const server = createServer((req, res) => {
         res.setHeader('Content-Type', "application/json")
         res.write(JSON.stringify(users))
         res.end()
-    } else {
+    }
+    else if (req.method === "POST" && req.url === "/api/users") {
+        let body = ''
+        //listen for data
+        req.on('data', (chunk) => {
+            body += chunk.toString()
+        })
+
+        req.on('end', () => {
+            const newUser = JSON.parse(body)
+            users.push(newUser)
+            res.statusCode = 201
+            res.write(JSON.stringify(newUser))
+            res.end()
+        })
+    }
+    else {
         res.setHeader('Content-Type', "application/json")
         res.statusCode = 404
         res.write(JSON.stringify({ message: "Route not found!" }))
