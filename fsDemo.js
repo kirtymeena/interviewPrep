@@ -31,4 +31,32 @@ const readFiles = async () => {
     }
 }
 
+
+
+
+// ============ write files===============
+
+//  writeFiles() => overwrites into the file
+const writeFiles = async () => {
+    try {
+        await fs.writeFile("./test.txt", "Hello")
+        console.log("File written to...")
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// to not overwrite - appendFile()
+
+const appendFile = async () => {
+    try {
+        await fs.appendFile("./test.txt", "\nAppending here")
+        console.log("File appended...")
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+writeFiles()
+appendFile()
 readFiles()
